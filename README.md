@@ -33,7 +33,9 @@ node
 	
 	* 检查过时并更新模块：npm outdated 检查包是否已经过时，此命令会列出所有已经过时的包，可以及时进行包的更新。
 	
-### 更新模块：npm update 模块名 例如 npm update gulp-less 
+### 更新模块
+
+	* npm update 模块名 例如 npm update gulp-less 
 
 # 使用 nvm 管理 node/npm 的版本
 
