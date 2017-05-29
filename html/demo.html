@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="https://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">  
+    <p ng-repeat="x in items | unique:'id'">  
+        {{x.id}}---{{x.name}}  
+    </p>  
+</div>  
+<script>  
+    //AngularJs 自定义过滤器  
+    //1.使用过滤器，去除重复  
+    angular.module('common', [])
+    .filter('unique', function () {  
+        return function (collection, keyname) {  
+            console.info(collection);  
+            console.info(keyname);  
+            var output = [],  
+                keys = [];  
+            // angular.forEach(collection, function (item) {  
+            //     var key = item[keyname];  
+            //     if (keys.indexOf(key) === -1) {  
+            //         keys.push(key);  
+            //         output.push(item);  
+            //     }  
+            // });
+            for (var i = 0; i < collection.length; i++) {
+            	var key = collection[i][keyname];  
+                if (keys.indexOf(key) === -1) {  
+                    keys.push(key);  
+                    output.push(collection[i]);  
+                } 
+            }
+            return output;  
+        }  
+    });
+      
+    var app = angular.module('myApp', ['common']);  
+    app.controller('myCtrl', function ($scope) {  
+        //$scope.items = [1, 2, 3,2];  
+        //当前unique 的过滤只针对，对象数组过滤  
+        $scope.items = [  
+            { id: 1, name: 'zhangsan' },  
+            { id: 2, name: 'lisi' },  
+            { id: 1, name: 'zhangsan' },  
+        ];  
+    });  
+</script>
+</body>
+</html>
